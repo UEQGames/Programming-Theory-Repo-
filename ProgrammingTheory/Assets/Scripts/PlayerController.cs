@@ -12,8 +12,9 @@ public class PlayerController : CalcUI
     public List<int> playerResults = new List<int>();
     
     private string result;
+    public int listSize;
     private StringBuilder _builder = new StringBuilder();
-    private StringBuilder _builderText = new StringBuilder();
+    
 
     void Start()
     {
@@ -29,8 +30,10 @@ public class PlayerController : CalcUI
 
     private void Update()
     {
-                
-        CheckResults();
+        if (listSize == enemyCalc.enemyResults.Count)
+        {
+            CheckResults();
+        }
 
 
     }
@@ -38,38 +41,38 @@ public class PlayerController : CalcUI
     void ButtonClicked(int index)
     {
         _builder.Append(index.ToString());
+        result = (_builder.ToString());
+        calcUI.SetText(result);
     }
 
     void BuildString()
     {
         int tempResult;
-        result = (_builder.ToString());
         int.TryParse(result, out tempResult);
         playerResults.Add(tempResult);
-        calcUI.SetText(result);
+        listSize++;
         _builder.Clear();
-        
-
 
     }
 
     private bool CheckResults()
     {
-        if (playerResults.Count != enemyCalc.enemyResults.Count)
-        {
-            return false;
-        }
+        
 
-        for (var i = 0; i < playerResults.Count; i++)
+        for (int i = 0; i < playerResults.Count; i++)
         {
             //If we find values at any point that don't match, return false
             if (playerResults[i] != enemyCalc.enemyResults[i])
-
+            {
+                Debug.Log("Você perdeu");
                 return false;
+            }
+           
         }
 
 
         //If we've made it this far, the lengths match and all values match
+        Debug.Log("Você Venceu");
         return true;
     }
 
