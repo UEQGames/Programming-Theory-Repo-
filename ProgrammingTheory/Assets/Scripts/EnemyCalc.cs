@@ -17,6 +17,7 @@ public class EnemyCalc : CalcUI
         
     }
 
+    //ABSTRACTION
     protected override int GenerateRandomCalc()
     {
         int index = Random.Range(0, 3);

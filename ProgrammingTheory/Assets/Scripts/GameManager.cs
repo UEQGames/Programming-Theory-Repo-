@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private HighScore _highScore;
     private TreasureBox _treasureBox;
     private int _score;
+    //ENCAPSULATION
     public int score { get { return _score; } private set { _score = value; } }
     private bool _isGameOver;
     private bool winRound;

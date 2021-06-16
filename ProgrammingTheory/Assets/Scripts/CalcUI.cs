@@ -6,6 +6,7 @@ using TMPro;
 
 public class CalcUI : MonoBehaviour
 {
+    //INHERITANCE
     [SerializeField] protected TextMeshProUGUI calcUI;
     protected StringBuilder builder = new StringBuilder();
     protected string calcString;
