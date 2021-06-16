@@ -61,5 +61,13 @@ public class EnemyCalc : CalcUI
         }
         return 0;
     }
+
+    public void RandomCalc()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GenerateRandomCalc();
+        }
+    }
   
 }

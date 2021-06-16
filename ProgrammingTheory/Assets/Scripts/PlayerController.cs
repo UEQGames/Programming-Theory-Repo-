@@ -9,10 +9,12 @@ public class PlayerController : CalcUI
     [SerializeField] private List<Button> _buttons = new List<Button>();
     [SerializeField] private Button _enter;
     private EnemyCalc enemyCalc;
+    private GameManager gameManager;
     public List<int> playerResults = new List<int>();
     
     private string result;
     public int listSize;
+    private bool winRound;
     private StringBuilder _builder = new StringBuilder();
     
 
@@ -20,6 +22,8 @@ public class PlayerController : CalcUI
     {
 
         enemyCalc = GameObject.Find("EnemyCalc").GetComponent<EnemyCalc>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         for (int i = 0; i < _buttons.Count; i++)
         {
             int cacheIndex = i; // we have to cache i to have the right value in the anonymous method
@@ -55,7 +59,7 @@ public class PlayerController : CalcUI
 
     }
 
-    private bool CheckResults()
+    private void CheckResults()
     {
         
 
@@ -64,19 +68,25 @@ public class PlayerController : CalcUI
             //If we find values at any point that don't match, return false
             if (playerResults[i] != enemyCalc.enemyResults[i])
             {
-                Debug.Log("Você perdeu");
-                return false;
+                gameManager.GameOver();
+               
             }
-           
+            else
+            {
+                //If we've made it this far, the lengths match and all values match
+                winRound = true;
+                
+            }
+            if (winRound)
+            {
+                gameManager.NewRound();
+                gameManager.AddScore();
+                listSize = 0;
+                winRound = false;
+            }
+
         }
 
-
-        //If we've made it this far, the lengths match and all values match
-        Debug.Log("Você Venceu");
-        return true;
     }
-
-   
-
 
 }
