@@ -7,8 +7,8 @@ using TMPro;
 public class CalcUI : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI calcUI;
-    protected string calcString;
     protected StringBuilder builder = new StringBuilder();
+    protected string calcString;
 
     protected virtual int GenerateRandomCalc() { return 0; }
     protected virtual void ShowCalc() 

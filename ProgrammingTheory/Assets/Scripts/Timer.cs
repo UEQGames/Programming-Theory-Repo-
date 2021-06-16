@@ -5,9 +5,10 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _timerUI;
     [SerializeField] private float _timer;
     public float timer { get { return _timer; } private set { _timer = value; } }
-    [SerializeField] private TextMeshProUGUI _timerUI;
+    
     
 
     // Start is called before the first frame update
