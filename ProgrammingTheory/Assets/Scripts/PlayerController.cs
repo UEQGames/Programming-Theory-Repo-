@@ -9,7 +9,9 @@ public class PlayerController : CalcUI
     [SerializeField] private List<Button> _buttons = new List<Button>();
     [SerializeField] private Button _enter;
     [SerializeField] private Button _clear;
+    [SerializeField] private AudioClip buttonSound;
     public List<int> playerResults = new List<int>();
+    private SoundManager _soundManager;
     private string result;
     public int listSize { get; set; }
     
@@ -17,7 +19,7 @@ public class PlayerController : CalcUI
 
     void Start()
     {
-
+        _soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         for (int i = 0; i < _buttons.Count; i++)
         {
             int cacheIndex = i; // we have to cache i to have the right value in the anonymous method
@@ -29,6 +31,7 @@ public class PlayerController : CalcUI
 
     void ButtonClicked(int index)
     {
+        _soundManager.PlaySound(buttonSound);
         builder.Append(index.ToString());
         result = (builder.ToString());
         calcUI.SetText(result);
@@ -36,6 +39,7 @@ public class PlayerController : CalcUI
 
     protected override void ShowCalc()
     {
+        _soundManager.PlaySound(buttonSound);
         int tempResult;
         int.TryParse(result, out tempResult);
         playerResults.Add(tempResult);
@@ -49,6 +53,7 @@ public class PlayerController : CalcUI
 
     public void ClearBtn()
     {
+        _soundManager.PlaySound(buttonSound);
         builder.Clear();
         calcUI.SetText("XXXX");
     }
